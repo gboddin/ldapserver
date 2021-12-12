@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-
+        "log"
 	ldap "github.com/lor00x/goldap/message"
 )
 
@@ -86,7 +86,8 @@ func readTagAndLength(conn *bufio.Reader, bytes *[]byte) (ret ldap.TagAndLength,
 	//	}
 	// We are expecting the LDAP sequence tag 0x30 as first byte
 	if b != 0x30 {
-		panic(fmt.Sprintf("Expecting 0x30 as first byte, but got %#x instead", b))
+		log.Println(fmt.Sprintf("Expecting 0x30 as first byte, but got %#x instead", b))
+                return
 	}
 
 	b, err = readBytes(conn, bytes, 1)
